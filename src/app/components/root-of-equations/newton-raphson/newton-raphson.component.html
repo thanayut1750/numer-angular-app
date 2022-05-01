@@ -1,0 +1,42 @@
+<!-- #Newton-Rapshon -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title> Newton raphson </mat-panel-title>
+  </mat-expansion-panel-header>
+  <h2>
+    Example Equation: <ng-katex [equation]="equation1"></ng-katex> And
+    <ng-katex [equation]="equation2"></ng-katex>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{ ans }}
+  </h2>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Result of Newton raphson method </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Iteration -->
+        <ng-container matColumnDef="itr">
+          <th mat-header-cell *matHeaderCellDef>Iteration</th>
+          <td mat-cell *matCellDef="let element">{{ element.itr }}</td>
+        </ng-container>
+
+        <!-- Xi -->
+        <ng-container matColumnDef="xi">
+          <th mat-header-cell *matHeaderCellDef>Xi</th>
+          <td mat-cell *matCellDef="let element">{{ element.xi }}</td>
+        </ng-container>
+
+        <!-- Error -->
+        <ng-container matColumnDef="err">
+          <th mat-header-cell *matHeaderCellDef>Error</th>
+          <td mat-cell *matCellDef="let element">{{ element.err }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-expansion-panel>
+
+</mat-expansion-panel>
+<!-- #Newton-Rapshon -->

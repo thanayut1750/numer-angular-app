@@ -1,0 +1,14 @@
+<div class="example-action-buttons container">
+  <button mat-button (click)="accordion.openAll()" class="btn btn-5">Expand All</button>
+  <button mat-button (click)="accordion.closeAll()" class="btn btn-5">Collapse All</button>
+</div>
+
+<mat-accordion class="example-headers-align" multi>
+
+  <app-bisection></app-bisection>
+  <app-false-position></app-false-position>
+  <app-one-point-iteration></app-one-point-iteration>
+  <app-secant></app-secant>
+  <app-newton-raphson></app-newton-raphson>
+  
+</mat-accordion>

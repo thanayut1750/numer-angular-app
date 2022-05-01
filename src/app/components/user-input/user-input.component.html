@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="user-input">
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label><h3>equation</h3></mat-label>
+        <input (keyup.enter)="sendUserEq(userInputEq.value)"  type="text"  matInput value="" #userInputEq/>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label><h3>xl</h3></mat-label>
+        <input (keyup.enter)="sendUserXl(userInputXl.value)" matInput placeholder="" value="" #userInputXl/>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label><h3>xr</h3></mat-label>
+        <input (keyup.enter)="sendUserXr(userInputXr.value)" matInput placeholder="" value="" #userInputXr/>
+      </mat-form-field>
+    </form>
+  </div>
+</div>

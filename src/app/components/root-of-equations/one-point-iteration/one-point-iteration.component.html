@@ -1,0 +1,58 @@
+<!-- #One-Point-Iteration-->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title> One-Point Iteration </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>
+    <h2>Example Equation: <ng-katex [equation]="equation1"></ng-katex>&nbsp;&nbsp;&nbsp;&nbsp;And&nbsp;&nbsp;&nbsp;&nbsp;  <ng-katex [equation]="equation2"></ng-katex> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{Ans}}</h2>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Result of One-Point Iteration method</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- Iteration -->
+          <ng-container matColumnDef="itr">
+            <th mat-header-cell *matHeaderCellDef>Iteration</th>
+            <td mat-cell *matCellDef="let element">{{ element.itr }}</td>
+          </ng-container>
+
+          <!-- XL -->
+          <ng-container matColumnDef="x0">
+            <th mat-header-cell *matHeaderCellDef>x0</th>
+            <td mat-cell *matCellDef="let element">{{ element.x0 }}</td>
+          </ng-container>
+
+          <!-- XR -->
+          <ng-container matColumnDef="fx0">
+            <th mat-header-cell *matHeaderCellDef>f(x0)</th>
+            <td mat-cell *matCellDef="let element">{{ element.fx0 }}</td>
+          </ng-container>
+
+          <!-- XM -->
+          <ng-container matColumnDef="x1">
+            <th mat-header-cell *matHeaderCellDef>x1</th>
+            <td mat-cell *matCellDef="let element">{{ element.x1 }}</td>
+          </ng-container>
+
+           <!-- fx -->
+           <ng-container matColumnDef="fx1">
+            <th mat-header-cell *matHeaderCellDef>f(x1)</th>
+            <td mat-cell *matCellDef="let element">{{ element.fx1 }}</td>
+          </ng-container>
+
+           <!-- err -->
+           <ng-container matColumnDef="err">
+            <th mat-header-cell *matHeaderCellDef>Error</th>
+            <td mat-cell *matCellDef="let element">{{ element.err }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</mat-expansion-panel>
+<!-- #One-Point-Iteration -->
