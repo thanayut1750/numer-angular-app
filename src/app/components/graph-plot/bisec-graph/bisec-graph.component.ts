@@ -9,6 +9,7 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
 export class BisecGraphComponent implements OnInit {
   @Input() x_plot_data: string[]=[];
   @Input() y_plot_data: number[]=[];
+  @Input() gtitle:string = '';
   @Input() displayGraph!: boolean;
 
   x!:string[];
@@ -16,19 +17,6 @@ export class BisecGraphComponent implements OnInit {
 
   graph:boolean = false;
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-        label: '1 - x / 13^(1 / 4)',
-        fill: true,
-        tension: 0.5,
-        borderColor: 'black',
-        backgroundColor: 'rgba(255,0,0,0.3)',
-      },
-    ],
-  };
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: false,
   };
@@ -40,6 +28,7 @@ export class BisecGraphComponent implements OnInit {
 
   show(){
     console.log(this.displayGraph)
+    console.log(this.gtitle)
     if(this.displayGraph) {
       this.x = this.x_plot_data;
       this.y= this.y_plot_data;
@@ -50,6 +39,22 @@ export class BisecGraphComponent implements OnInit {
       this.graph = this.displayGraph;
     }
   }
+
+
+  public lineChartData: ChartConfiguration<'line'>['data'] = {
+    labels: [],
+    datasets: [
+      {
+        data: [],
+        label: this.gtitle,
+        fill: true,
+        tension: 0.5,
+        borderColor: 'black',
+        backgroundColor: 'rgba(255,0,0,0.3)',
+      },
+    ],
+  };
+  
   resetData(){
     this.y_plot_data = [];
     this.x_plot_data = [];

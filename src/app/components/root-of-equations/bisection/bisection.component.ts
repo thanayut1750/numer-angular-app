@@ -43,6 +43,7 @@ export class BisectionComponent implements OnInit {
   DATA: Dataschema[] = [];
   x_data:string[] = [];
   y_data:number[] = [];
+  gtitle:string = '';
 
   //GET DATA FROM USER
   getUserEq(ueq: string) {
@@ -51,6 +52,7 @@ export class BisectionComponent implements OnInit {
     const node = math.parse(ueq)
     var t = node.toTex()
     console.log(t)
+    this.gtitle = t;
     this.buatifulEq = t
   }
   getUserXl(ueq: number) {

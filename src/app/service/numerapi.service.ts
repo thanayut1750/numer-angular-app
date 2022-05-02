@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class NumerapiService {
 
   constructor(private _http: HttpClient) { }
-  //
-  numerApiUrl = "http://localhost:8000/"
+  //http://localhost:8000/
+  numerApiUrl = ""
 
   testApiCall():Observable<any> {
     return this._http.get(this.numerApiUrl)
