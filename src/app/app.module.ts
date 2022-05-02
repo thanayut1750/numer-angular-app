@@ -10,7 +10,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExpansionContentComponent } from './components/expansion-content/expansion-content.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { NgChartsModule } from 'ng2-charts';
 import { BisectionComponent } from './components/root-of-equations/bisection/bisection.component';
 import { FalsePositionComponent } from './components/root-of-equations/false-position/false-position.component';
 import { OnePointIterationComponent } from './components/root-of-equations/one-point-iteration/one-point-iteration.component';
@@ -45,7 +44,6 @@ import { AppRoutingModule } from './app-routing.module';
     MatTabsModule,
     MatNativeDateModule,
     MatExpansionModule,
-    NgChartsModule,
     MatTableModule,
     KatexModule,
     MatButtonModule,
