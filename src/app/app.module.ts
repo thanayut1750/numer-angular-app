@@ -18,7 +18,6 @@ import { SecantComponent } from './components/root-of-equations/secant/secant.co
 import { NewtonRaphsonComponent } from './components/root-of-equations/newton-raphson/newton-raphson.component';
 import { MatTableModule } from '@angular/material/table'
 import { KatexModule } from 'ng-katex';
-import { BisecGraphComponent } from './components/graph-plot/bisec-graph/bisec-graph.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { UserInputComponent } from './components/user-input/user-input.component';
@@ -37,7 +36,6 @@ import { AppRoutingModule } from './app-routing.module';
     OnePointIterationComponent,
     SecantComponent,
     NewtonRaphsonComponent,
-    BisecGraphComponent,
     UserInputComponent
 
   ],
