@@ -1,0 +1,10 @@
+<div class="example-action-buttons container">
+  <button mat-button (click)="accordion.openAll()" class="btn btn-5">Expand All</button>
+  <button mat-button (click)="accordion.closeAll()" class="btn btn-5">Collapse All</button>
+</div>
+
+<mat-accordion class="example-headers-align" multi>
+  <app-jacobi></app-jacobi>
+  <app-gauss-seidel></app-gauss-seidel>
+  <app-conjugate-gradient></app-conjugate-gradient>
+</mat-accordion>

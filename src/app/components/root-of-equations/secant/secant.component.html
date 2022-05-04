@@ -1,8 +1,124 @@
-<!-- #False-Position -->
+<!-- #One-Point-Iteration-->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
-    <mat-panel-title> Secant </mat-panel-title>
+    <mat-panel-title> Secant Methods</mat-panel-title>
   </mat-expansion-panel-header>
-  <div class="content1">Secant</div>
+  <div>
+    <div class="container">
+      <h2>
+        Example Equation:
+        <ng-katex [equation]="equation"></ng-katex>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{ Ans }}
+      </h2>
+      <br />
+      <!-- user-input-equation -->
+      <h1 id="two-way">
+        Your Equation:&nbsp;&nbsp;<ng-katex
+          [equation]="user_equation"
+        ></ng-katex>&nbsp;&nbsp;x1:{{ user_x1 }}&nbsp;&nbsp; x2:{{  user_x2 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        the value of x = {{ user_ans }}
+      </h1>
+      <div id="two-way-2">
+        <div class="container">
+          <div class="user-input">
+            <form class="example-form">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label><h3>equation</h3></mat-label>
+                <input
+                  (keyup.enter)="UserEq(userInputEq.value)"
+                  type="text"
+                  matInput
+                  value=""
+                  #userInputEq
+                />
+              </mat-form-field>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label><h3>x1</h3></mat-label>
+                <input
+                  (keyup.enter)="Userx1(userInputx1.value)"
+                  type="text"
+                  matInput
+                  value=""
+                  #userInputx1
+                />
+              </mat-form-field>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label><h3>x2</h3></mat-label>
+                <input
+                  (keyup.enter)="Userx2(userInputx2.value)"
+                  type="text"
+                  matInput
+                  value=""
+                  #userInputx2
+                />
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+
+        <button mat-raised-button color="primary" (click)="resetData()">
+          Clear
+        </button>
+      </div>
+      <br />
+      <!-- user-input-equation -->
+    </div>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Result of Secant Iteration method</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Iteration -->
+          <ng-container matColumnDef="itr">
+            <th mat-header-cell *matHeaderCellDef>Iteration</th>
+            <td mat-cell *matCellDef="let element">{{ element.itr }}</td>
+          </ng-container>
+
+          <!-- XL -->
+          <ng-container matColumnDef="x0">
+            <th mat-header-cell *matHeaderCellDef>x0</th>
+            <td mat-cell *matCellDef="let element">{{ element.x0 }}</td>
+          </ng-container>
+
+          <!-- XR -->
+          <ng-container matColumnDef="x1">
+            <th mat-header-cell *matHeaderCellDef>x1</th>
+            <td mat-cell *matCellDef="let element">{{ element.x1 }}</td>
+          </ng-container>
+
+          <!-- XM -->
+          <ng-container matColumnDef="xm">
+            <th mat-header-cell *matHeaderCellDef>xm</th>
+            <td mat-cell *matCellDef="let element">{{ element.xm }}</td>
+          </ng-container>
+
+          <!-- fx -->
+          <ng-container matColumnDef="fx">
+            <th mat-header-cell *matHeaderCellDef>fx</th>
+            <td mat-cell *matCellDef="let element">{{ element.fx }}</td>
+          </ng-container>
+
+          <!-- err -->
+          <ng-container matColumnDef="err">
+            <th mat-header-cell *matHeaderCellDef>Error</th>
+            <td mat-cell *matCellDef="let element">{{ element.err }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </mat-expansion-panel>
+  </div>
+  <div class="container">
+    <button mat-raised-button color="primary" (click)="graph()">Graph</button>
+    <app-secant-plot
+      [x1_data]="x0_data"
+      [x2_data]="x1_data"
+      [displayedGraph]="displayGraph"
+    ></app-secant-plot>
+  </div>
 </mat-expansion-panel>
-<!-- #False-Position -->
+<!-- #One-Point-Iteration -->

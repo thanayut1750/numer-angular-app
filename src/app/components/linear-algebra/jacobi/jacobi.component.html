@@ -1,0 +1,158 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title> Jacobi Iteration</mat-panel-title>
+  </mat-expansion-panel-header>
+  <p>jacobi works!</p>
+  <div class="container">
+    <h2>
+      Example Equation1:
+      <ng-katex [equation]="ex_eq1"></ng-katex> for x1
+    </h2>
+    <h2>
+      Example Equation2:
+      <ng-katex [equation]="ex_eq2"></ng-katex> for x2
+    </h2>
+    <h2>
+      Example Equation3:
+      <ng-katex [equation]="ex_eq3"></ng-katex> for x3
+    </h2>
+    <h2>
+      Example Equation4:
+      <ng-katex [equation]="ex_eq4"></ng-katex> for x4
+    </h2>
+
+    <br />
+    <!-- user-input-equation -->
+    <h1 id="two-way">
+      Your Equation1:&nbsp;&nbsp;<ng-katex [equation]="beq1"></ng-katex>
+    </h1>
+    <h1 id="two-way">
+      Your Equation2:&nbsp;&nbsp;<ng-katex [equation]="beq2"></ng-katex>
+    </h1>
+    <h1 id="two-way">
+      Your Equation3:&nbsp;&nbsp;<ng-katex [equation]="beq3"></ng-katex>
+    </h1>
+    <h1 id="two-way">
+      Your Equation4:&nbsp;&nbsp;<ng-katex [equation]="beq4"></ng-katex>
+    </h1>
+
+    <div id="two-way-2">
+      <div class="container">
+        <div class="user-input">
+          <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label><h3>equation1</h3></mat-label>
+              <input
+                (keyup.enter)="UserEq1(userInputEq1.value)"
+                type="text"
+                matInput
+                value=""
+                #userInputEq1
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label><h3>equation2</h3></mat-label>
+              <input
+                (keyup.enter)="UserEq2(userInputEq2.value)"
+                type="text"
+                matInput
+                value=""
+                #userInputEq2
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label><h3>equation3</h3></mat-label>
+              <input
+                (keyup.enter)="UserEq3(userInputEq3.value)"
+                type="text"
+                matInput
+                value=""
+                #userInputEq3
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label><h3>equation4</h3></mat-label>
+              <input
+                (keyup.enter)="UserEq4(userInputEq4.value)"
+                type="text"
+                matInput
+                value=""
+                #userInputEq4
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label><h3>Enter tolerable error:</h3></mat-label>
+              <input
+                (keyup.enter)="UserErr(userInputErr.value)"
+                type="text"
+                matInput
+                value=""
+                #userInputErr
+              />
+            </mat-form-field>
+          </form>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" (click)="resetData()">
+        Clear
+      </button>
+    </div>
+    <br />
+    <!-- user-input-equation -->
+  </div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Result of Jacobi Iteration method</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div>
+      <h2>x1 = {{ x1 }}</h2>
+      <h2>x2 = {{ x2 }}</h2>
+      <h2>x3 = {{ x3 }}</h2>
+      <h2>x4 = {{ x4 }}</h2>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Iteration -->
+        <ng-container matColumnDef="itr">
+          <th mat-header-cell *matHeaderCellDef>Iteration</th>
+          <td mat-cell *matCellDef="let element">{{ element.itr }}</td>
+        </ng-container>
+
+        <!-- x1 -->
+        <ng-container matColumnDef="x1">
+          <th mat-header-cell *matHeaderCellDef>x1</th>
+          <td mat-cell *matCellDef="let element">{{ element.x1 }}</td>
+        </ng-container>
+
+        <!-- x2 -->
+        <ng-container matColumnDef="x2">
+          <th mat-header-cell *matHeaderCellDef>x2</th>
+          <td mat-cell *matCellDef="let element">{{ element.x2 }}</td>
+        </ng-container>
+
+        <!-- x3 -->
+        <ng-container matColumnDef="x3">
+          <th mat-header-cell *matHeaderCellDef>x3</th>
+          <td mat-cell *matCellDef="let element">{{ element.x3 }}</td>
+        </ng-container>
+
+        <!-- x4 -->
+        <ng-container matColumnDef="x4">
+          <th mat-header-cell *matHeaderCellDef>x4</th>
+          <td mat-cell *matCellDef="let element">{{ element.x4 }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-expansion-panel>
+  <div class="container">
+    <button mat-raised-button color="primary" (click)="graph()">Graph</button>
+    <app-jacobi-plot
+      [x1]="x1_data"
+      [x2]="x2_data"
+      [x3]="x3_data"
+      [x4]="x4_data"
+      [displayedGraph]="displayGraph"
+    ></app-jacobi-plot>
+  </div>
+</mat-expansion-panel>

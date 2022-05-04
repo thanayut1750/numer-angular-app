@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component,  OnInit,  ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import * as math from 'mathjs';
 import { Dataschema } from '../../../schema';
@@ -10,21 +10,20 @@ import { NumerapiService } from '../../../service/numerapi.service'
   styleUrls: ['./bisection.component.css'],
 })
 export class BisectionComponent implements OnInit {
-  displayGraph = false;
+  displayGraph:boolean = false;
   graph(){
     this.displayGraph = !this.displayGraph;
   }
 
   constructor(private _service: NumerapiService) {}
-
   ngOnInit(): void {
-    this._service.testApiCall().subscribe((equations)=>{
-      console.log(equations);
-      this.equation = equations.Bisection.eq;
-      this.exl = equations.Bisection.xl;
-      this.exr = equations.Bisection.xr;
-      this.root = equations.Bisection.ans;
-    })
+    // this._service.testApiCall().subscribe((equations)=>{
+    //   // console.log(equations);
+    //   this.equation = equations.Bisection.eq;
+    //   this.exl = equations.Bisection.xl;
+    //   this.exr = equations.Bisection.xr;
+    //   this.root = equations.Bisection.ans;
+    // })
   }
 
   @ViewChild(MatTable)
@@ -43,7 +42,7 @@ export class BisectionComponent implements OnInit {
   DATA: Dataschema[] = [];
   x_data:string[] = [];
   y_data:number[] = [];
-  gtitle:string = '';
+
 
   //GET DATA FROM USER
   getUserEq(ueq: string) {
@@ -51,8 +50,7 @@ export class BisectionComponent implements OnInit {
 
     const node = math.parse(ueq)
     var t = node.toTex()
-    console.log(t)
-    this.gtitle = t;
+
     this.buatifulEq = t
   }
   getUserXl(ueq: number) {
@@ -120,7 +118,7 @@ export class BisectionComponent implements OnInit {
       this.x_data.push(String(this.xm))
       this.y_data.push(this.fx)
     }
-    this.table.renderRows();
+    this.table.renderRows(); //reset table
     return (this.root = c.toFixed(4));
   }
 

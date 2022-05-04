@@ -9,11 +9,11 @@ export class NumerapiService {
 
   constructor(private _http: HttpClient) { }
   //http://localhost:8000/
-  numerApiUrl = ""
+  // numerApiUrl = ""
 
-  testApiCall():Observable<any> {
-    return this._http.get(this.numerApiUrl)
-  }
+  // testApiCall():Observable<any> {
+  //   return this._http.get(this.numerApiUrl)
+  // }
 
 
 }

@@ -22,3 +22,22 @@ export interface NewtonRaphson
   xi: number;
   err: number;
 }
+
+export interface Secant
+{
+  itr: number;
+  x0: number;
+  x1: number;
+  xm: number;
+  fx: number;
+  err: number;
+}
+
+export interface Jacobi
+{
+  itr: number;
+  x1: number;
+  x2: number;
+  x3: number;
+  x4: number;
+}

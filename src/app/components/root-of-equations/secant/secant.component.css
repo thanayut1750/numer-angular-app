@@ -1,0 +1,51 @@
+/* asdasd */
+
+@import '~katex/dist/katex.css';
+table {
+  width: 100%;
+}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+*{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+
+.container {
+    align-items: inline;
+    flex-direction: row;
+    justify-content: left;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+
+.example-full-width {
+  width: 100%;
+}
+

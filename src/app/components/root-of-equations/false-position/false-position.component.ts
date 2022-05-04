@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Dataschema } from 'src/app/schema';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable } from '@angular/material/table';
+import * as math from 'mathjs';
+import { Dataschema } from '../../../schema';
 
 @Component({
   selector: 'app-false-position',
@@ -7,11 +9,17 @@ import { Dataschema } from 'src/app/schema';
   styleUrls: ['./false-position.component.css'],
 })
 export class FalsePositionComponent implements OnInit {
-
+  displayGraph: boolean = false;
+  graph() {
+    this.displayGraph = !this.displayGraph;
+  }
 
   ngOnInit(): void {}
 
-  MAX_ITER = 1000000000;
+  @ViewChild(MatTable)
+  table!: MatTable<any>;
+
+  MAX_ITER = 100;
   xm: number = 0; // x: middle point
   err: number = 0;
   fx: number = 0;
@@ -20,9 +28,39 @@ export class FalsePositionComponent implements OnInit {
   xr: number = 0;
 
   DATA: Dataschema[] = [];
+  x_data: string[] = [];
+  y_data: number[] = [];
 
+  //GET DATA FROM USER
+  getUserEq(ueq: string) {
+    this.user_equation = ueq;
+
+    const node = math.parse(ueq);
+    var t = node.toTex();
+    this.buatifulEq = t;
+  }
+  getUserXl(ueq: number) {
+    this.user_xl = ueq;
+  }
+  getUserXr(ueq: number) {
+    this.user_xr = ueq;
+    this.user_ans = this.regulaFalsi(this.user_xl, this.user_xr);
+
+  }
+  resetData() {
+    this.user_equation = '';
+    this.user_xl = 0;
+    this.user_xr = 0;
+    this.buatifulEq = '';
+    this.user_ans = '';
+    this.DATA = [];
+  }
+  // DRIVING FlasePo FUNCTIONS
   func(x: number): number {
-    return (1/43)**2 - x**2;
+    let scope = {
+      x: x,
+    };
+    return math.evaluate(this.user_equation, scope);
   }
 
   // Prints root of func(x) in interval [a, b]
@@ -38,9 +76,7 @@ export class FalsePositionComponent implements OnInit {
       // Find the point that touches x axis
       this.xl = a;
       this.xr = b;
-      c = (
-        (a * this.func(b) - b * this.func(a)) / (this.func(b) - this.func(a))
-      );
+      c = (a * this.func(b) - b * this.func(a)) / (this.func(b) - this.func(a));
 
       this.xm = c;
 
@@ -67,20 +103,27 @@ export class FalsePositionComponent implements OnInit {
         fx: this.fx,
         err: this.err,
       });
+
+      this.x_data.push(String(this.xm))
+      this.y_data.push(this.fx)
     }
-    return { 'x': c };
+
+    this.table.renderRows(); //reset table
+    return c;
   }
 
-  // Initial values assumed
-  a = 0.02;
-  b = 0.03;
-  ans = this.regulaFalsi(this.a, this.b);
-  equation: string = '(\\frac{1}{43})^2 - x^2';
+  //EXAMPLE EQUATION
+  equation: string = '';
+  exl = 0;
+  exr = 0;
 
-  constructor() {
-    // console.log(this.ans);
-    // console.log(this.DATA);
-  }
+  //Table Data source
   displayedColumns: string[] = ['itr', 'xl', 'xr', 'xm', 'fx', 'err'];
-  dataSource = this.DATA;
+
+  //USER INPUT
+  user_equation: string = '';
+  user_xl!:number;
+  user_xr!:number;
+  buatifulEq: string = '';
+  user_ans!:string;
 }

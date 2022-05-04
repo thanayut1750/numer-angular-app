@@ -24,6 +24,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NumerapiService } from './service/numerapi.service'
 import { AppRoutingModule } from './app-routing.module';
+import { GraphPlotComponent } from './components/graph-plot/graph-plot.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { OnePPlotComponent } from './components/graph-plot/one-p-plot/one-p-plot.component';
+import { SecantPlotComponent } from './components/graph-plot/secant-plot/secant-plot.component';
+import { NewraphPlotComponent } from './components/graph-plot/newraph-plot/newraph-plot.component';
+import { LinearSystemComponent } from './components/expansion-content/linear-system/linear-system.component';
+import { JacobiComponent } from './components/linear-algebra/jacobi/jacobi.component';
+import { GaussSeidelComponent } from './components/linear-algebra/gauss-seidel/gauss-seidel.component';
+import { ConjugateGradientComponent } from './components/linear-algebra/conjugate-gradient/conjugate-gradient.component';
+import { JacobiPlotComponent } from './components/graph-plot/linear-sys/jacobi/jacobi-plot.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +45,16 @@ import { AppRoutingModule } from './app-routing.module';
     OnePointIterationComponent,
     SecantComponent,
     NewtonRaphsonComponent,
-    UserInputComponent
-
+    UserInputComponent,
+    GraphPlotComponent,
+    OnePPlotComponent,
+    SecantPlotComponent,
+    NewraphPlotComponent,
+    LinearSystemComponent,
+    JacobiComponent,
+    GaussSeidelComponent,
+    ConjugateGradientComponent,
+    JacobiPlotComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +69,9 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    HighchartsChartModule
   ],
+
   providers: [NumerapiService],
   bootstrap: [AppComponent]
 })

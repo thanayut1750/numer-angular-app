@@ -4,14 +4,66 @@
     <mat-panel-title> One-Point Iteration </mat-panel-title>
   </mat-expansion-panel-header>
   <div>
-    <h2>Example Equation: <ng-katex [equation]="equation1"></ng-katex>&nbsp;&nbsp;&nbsp;&nbsp;And&nbsp;&nbsp;&nbsp;&nbsp;  <ng-katex [equation]="equation2"></ng-katex> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{Ans}}</h2>
+    <div class="container">
+      <h2>
+        Example Equation:
+        <ng-katex [equation]="equation1"></ng-katex
+        >&nbsp;&nbsp;&nbsp;&nbsp;And&nbsp;&nbsp;&nbsp;&nbsp;
+        <ng-katex [equation]="equation2"></ng-katex>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{ Ans }}
+      </h2>
+      <br />
+      <!-- user-input-equation -->
+      <h1 id="two-way">
+        Your Equation:&nbsp;&nbsp;equation1:<ng-katex
+          [equation]="buatifulEq1"
+        ></ng-katex
+        >&nbsp;&nbsp; equation2:<ng-katex [equation]="buatifulEq2"></ng-katex
+        >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x =
+        {{ Ans }}
+      </h1>
+      <div id="two-way-2">
+        <div class="container">
+          <div class="user-input">
+            <form class="example-form">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label><h3>equation1</h3></mat-label>
+                <input
+                  (keyup.enter)="UserEq1(userInputEq1.value)"
+                  type="text"
+                  matInput
+                  value=""
+                  #userInputEq1
+                />
+              </mat-form-field>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label><h3>equation2</h3></mat-label>
+                <input
+                  (keyup.enter)="UserEq2(userInputEq2.value)"
+                  type="text"
+                  matInput
+                  value=""
+                  #userInputEq2
+                />
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+
+        <button mat-raised-button color="primary" (click)="resetData()">
+          Clear
+        </button>
+      </div>
+      <br />
+      <!-- user-input-equation -->
+    </div>
+
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title> Result of One-Point Iteration method</mat-panel-title>
       </mat-expansion-panel-header>
       <div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
           <!-- Iteration -->
           <ng-container matColumnDef="itr">
             <th mat-header-cell *matHeaderCellDef>Iteration</th>
@@ -36,14 +88,14 @@
             <td mat-cell *matCellDef="let element">{{ element.x1 }}</td>
           </ng-container>
 
-           <!-- fx -->
-           <ng-container matColumnDef="fx1">
+          <!-- fx -->
+          <ng-container matColumnDef="fx1">
             <th mat-header-cell *matHeaderCellDef>f(x1)</th>
             <td mat-cell *matCellDef="let element">{{ element.fx1 }}</td>
           </ng-container>
 
-           <!-- err -->
-           <ng-container matColumnDef="err">
+          <!-- err -->
+          <ng-container matColumnDef="err">
             <th mat-header-cell *matHeaderCellDef>Error</th>
             <td mat-cell *matCellDef="let element">{{ element.err }}</td>
           </ng-container>
@@ -53,6 +105,14 @@
         </table>
       </div>
     </mat-expansion-panel>
+  </div>
+  <div class="container">
+    <button mat-raised-button color="primary" (click)="graph()">Graph</button>
+    <app-one-p-plot
+      [fx0]="fx0_data"
+      [fx1]="fx1_data"
+      [displayedGraph]="displayGraph"
+    ></app-one-p-plot>
   </div>
 </mat-expansion-panel>
 <!-- #One-Point-Iteration -->

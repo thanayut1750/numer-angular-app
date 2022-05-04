@@ -4,17 +4,40 @@
     <mat-panel-title> False-Position </mat-panel-title>
   </mat-expansion-panel-header>
   <div>
-    <h2>
-      Example Equation:
-      <ng-katex [equation]="equation"></ng-katex>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{ ans.x }}
-    </h2>
+    <div class="container">
+      <h2>
+        Example Equation:
+        <ng-katex [equation]="equation"></ng-katex>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{ 0 }}
+      </h2>
+      <br />
+      <!-- user-input-equation -->
+      <h1 id="two-way">
+        Your Equation:<ng-katex [equation]="buatifulEq"></ng-katex
+        >&nbsp;&nbsp;XL : {{ user_xl }} &nbsp;&nbsp; XR :
+        {{ user_xr }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x =
+        {{ user_ans }}
+      </h1>
+      <div id="two-way-2">
+        <app-user-input
+          (userEq)="getUserEq($event)"
+          (userXl)="getUserXl($event)"
+          (userXr)="getUserXr($event)"
+        ></app-user-input>
+        <button mat-raised-button color="primary" (click)="resetData()">
+          Clear
+        </button>
+      </div>
+      <br />
+      <!-- user-input-equation -->
+    </div>
+
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title> Result of False-Position method </mat-panel-title>
       </mat-expansion-panel-header>
       <div>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="DATA" class="mat-elevation-z8">
           <!-- Iteration -->
           <ng-container matColumnDef="itr">
             <th mat-header-cell *matHeaderCellDef>Iteration</th>
@@ -56,5 +79,13 @@
         </table>
       </div>
     </mat-expansion-panel>
+  </div>
+  <div class="container">
+    <button mat-raised-button color="primary" (click)="graph()">Graph</button>
+    <app-graph-plot
+      [x_data]="x_data"
+      [y_data]="y_data"
+      [displayedGraph]="displayGraph"
+    ></app-graph-plot>
   </div>
 </mat-expansion-panel>

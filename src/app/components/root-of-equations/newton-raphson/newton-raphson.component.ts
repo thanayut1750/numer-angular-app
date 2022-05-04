@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NewtonRaphson } from 'src/app/schema';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable } from '@angular/material/table';
+import * as math from 'mathjs';
+import { NewtonRaphson } from '../../../schema';
 
 @Component({
   selector: 'app-newton-raphson',
@@ -7,23 +9,61 @@ import { NewtonRaphson } from 'src/app/schema';
   styleUrls: ['./newton-raphson.component.css'],
 })
 export class NewtonRaphsonComponent implements OnInit {
-
-
+  displayGraph: boolean = false;
+  graph() {
+    this.displayGraph = !this.displayGraph;
+  }
   ngOnInit(): void {}
+  constructor(){}
+
 
   EPSILON = 0.000001;
   itr: number = 1;
-  xi: NewtonRaphson[] = [];
-  e:number = 0;
+  DATA: NewtonRaphson[] = [];
+  e: number = 0;
   xp: number = 0;
+
+
+  user_equation:string = '';
+  user_x0: string = '';
+  user_ans:string = '';
+  Ans: any;
+
+  @ViewChild(MatTable)
+  table!: MatTable<any>;
   // An example function whose solution
   // is determined using Bisection Method.
+  UserEq(eq1: string) {
+    this.user_equation = eq1;
+    this.buatifulEq1 = this.buatifulEq(eq1);
+
+  }
+  UserX0(eq2: string) {
+    this.user_x0 = eq2;
+    this.Ans = this.newtonRaphson(Number(this.user_x0));
+    // console.log(this.DATA)
+  }
+  buatifulEq(eq: string) {
+    const node = math.parse(eq);
+    var t = node.toTex();
+    return t;
+  }
+  resetData() {
+    this.user_equation = '';
+    this.buatifulEq1 = '';
+    this.user_ans = '';
+    this.DATA = [];
+  }
+
   func(x: number) {
-    return x ** 2 - 7;
+    let scope = {
+      x: x,
+    };
+    return math.evaluate(this.user_equation, scope);
   }
   // Derivative of the above function
   derivFunc(x: number) {
-    return 2 * x;
+    return math.derivative(this.user_equation, 'x').evaluate({ x: x });
   }
   // Function to find the root
   newtonRaphson(x: number) {
@@ -32,20 +72,21 @@ export class NewtonRaphsonComponent implements OnInit {
       h = this.func(x) / this.derivFunc(x);
       // x(i+1) = x(i) - f(x) / f'(x)
       x = x - h;
-      this.e = ((x - this.xp)/x)*100;
+      this.e = Math.abs(((x - this.xp) / x) * 100);
       this.xp = x;
-      this.xi.push({'itr':this.itr++,'xi':x, 'err':this.e})
+      this.DATA.push({ itr: this.itr++, xi: x, err: this.e });
+      this.x0_data.push(x)
     }
+    this.table.renderRows(); //reset table
+    this.ans = this.xp
     return this.xp;
   }
-  // Driver program
-  x0 = 2;
-  ans: any = this.newtonRaphson(this.x0);
-  constructor() {
-    // console.log(this.xi)
-  }
+
+  ans: any;
   displayedColumns: string[] = ['itr', 'xi', 'err'];
-  dataSource = this.xi;
-  equation1: string = 'f(x)= x^2 - 7';
-  equation2: string = 'f\'(x)= 2x';
+  dataSource = this.DATA;
+
+  equation: string = '';
+  buatifulEq1: string = '';
+  x0_data: number[] = [];
 }
