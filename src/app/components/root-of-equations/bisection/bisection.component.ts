@@ -17,13 +17,13 @@ export class BisectionComponent implements OnInit {
 
   constructor(private _service: NumerapiService) {}
   ngOnInit(): void {
-    // this._service.testApiCall().subscribe((equations)=>{
-    //   // console.log(equations);
-    //   this.equation = equations.Bisection.eq;
-    //   this.exl = equations.Bisection.xl;
-    //   this.exr = equations.Bisection.xr;
-    //   this.root = equations.Bisection.ans;
-    // })
+    this._service.bisectionCall().subscribe((equations)=>{
+      console.log(equations);
+      this.equation = equations.Bisection.eq;
+      this.exl = equations.Bisection.xl;
+      this.exr = equations.Bisection.xr;
+      this.root = equations.Bisection.ans;
+    })
   }
 
   @ViewChild(MatTable)

@@ -8,10 +8,8 @@ import * as Highcharts from 'highcharts';
   styleUrls: ['./jacobi-plot.component.css'],
 })
 export class JacobiPlotComponent {
-  @Input() x1: number[] = [];
-  @Input() x2: number[] = [];
-  @Input() x3: number[] = [];
-  @Input() x4: number[] = [];
+  @Input() xi: math.MathType[] = [];
+
   @Input() displayedGraph!: boolean;
 
   constructor() {}
@@ -60,22 +58,7 @@ export class JacobiPlotComponent {
     this.chartOptions.series![0] = {
       name: 'x1',
       type: 'line',
-      data: this.x1,
-    };
-    this.chartOptions.series![1] = {
-      name: 'x2',
-      type: 'line',
-      data: this.x2,
-    };
-    this.chartOptions.series![2] = {
-      name: 'x3',
-      type: 'line',
-      data: this.x3,
-    };
-    this.chartOptions.series![3] = {
-      name: 'x4',
-      type: 'line',
-      data: this.x4,
+      data:[this.xi],
     };
 
     // console.log(this.fx1)

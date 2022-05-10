@@ -6,23 +6,22 @@
   <div class="container">
     <h2>
       Example Equation:
-      <ng-katex [equation]="equation"></ng-katex
-      >
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{ ans }}
+      <ng-katex [equation]="equation"></ng-katex>
+      &nbsp;&nbsp;&nbsp;&nbsp; x0 = {{ ex0 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the value of x = {{ root }}
     </h2>
     <br />
     <!-- user-input-equation -->
     <h1 id="two-way">
-      Your Equation:&nbsp;&nbsp;equation1:<ng-katex
-        [equation]="buatifulEq1"
-      ></ng-katex>the value of x ={{ ans }}
+      Your Equation:&nbsp;&nbsp;<ng-katex [equation]="buatifulEq1"
+        ></ng-katex
+      >the value of x ={{ ans }}
     </h1>
     <div id="two-way-2">
       <div class="container">
         <div class="user-input">
           <form class="example-form">
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label><h3>equation1</h3></mat-label>
+              <mat-label><h3>equation</h3></mat-label>
               <input
                 (keyup.enter)="UserEq(userInputEq.value)"
                 type="text"
@@ -32,7 +31,7 @@
               />
             </mat-form-field>
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label><h3>equation2</h3></mat-label>
+              <mat-label><h3>x0</h3></mat-label>
               <input
                 (keyup.enter)="UserX0(userInputX0.value)"
                 type="text"

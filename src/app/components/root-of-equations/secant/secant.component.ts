@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import * as math from 'mathjs';
+import { NumerapiService } from 'src/app/service/numerapi.service';
 import { Secant } from '../../../schema';
 
 @Component({
@@ -14,7 +15,16 @@ export class SecantComponent {
   graph() {
     this.displayGraph = !this.displayGraph;
   }
-  ngOnInit(): void {}
+  constructor(private _service: NumerapiService) {}
+  ngOnInit(): void {
+    this._service.secantCall().subscribe((equations)=>{
+      console.log(equations);
+      this.equation = equations.Secant.eq;
+      this.ex1 = equations.Secant.x1;
+      this.ex2 = equations.Secant.x2;
+      this.root = equations.Secant.ans;
+    })
+  }
 
   @ViewChild(MatTable)
   table!: MatTable<any>;
@@ -40,14 +50,15 @@ export class SecantComponent {
     // this.user_equation1 = eq;
     this.user_equation = eq;
     this.buatifulEq = this.buaEq(eq);
-
+    // console.log(this.buatifulEq);
   }
   Userx1(x1: string) {
     this.user_x1 = x1;
   }
   Userx2(x2: string) {
     this.user_x2 = x2;
-    this.Ans = this.secant(Number(this.user_x1), Number(this.user_x2), this.iE);
+    this.secant(Number(this.user_x1), Number(this.user_x2), this.iE);
+    this.user_ans = this.Ans
   }
 
   buaEq(eq: string) {
@@ -112,6 +123,7 @@ export class SecantComponent {
       // until the convergence
 
       this.Ans =  x0.toFixed(6);
+      // console.log(this.Ans);
 
     } else alert('Can not find a root in the given interval');
     this.table.renderRows(); //reset table
@@ -125,8 +137,9 @@ export class SecantComponent {
 
   //EXAMPLE EQUATION
   equation: string = '';
-  eq1 = 0;
-  eq2 = 0;
+  ex1 = 0;
+  ex2 = 0;
+  root!:string;
 
   //USER INPUT
   user_equation: string = '';

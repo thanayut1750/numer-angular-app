@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import * as math from 'mathjs';
+import { NumerapiService } from 'src/app/service/numerapi.service';
 import { NewtonRaphson } from '../../../schema';
 
 @Component({
@@ -13,9 +14,16 @@ export class NewtonRaphsonComponent implements OnInit {
   graph() {
     this.displayGraph = !this.displayGraph;
   }
-  ngOnInit(): void {}
-  constructor(){}
-
+  constructor(private _service: NumerapiService) {}
+  ngOnInit(): void {
+    this._service.newraphCall().subscribe((equations)=>{
+      console.log(equations);
+      this.equation = equations.Newraph.eq;
+      this.ex0 = equations.Newraph.x0;
+      this.root = equations.Newraph.ans;
+    })
+  }
+  root!:string;
 
   EPSILON = 0.000001;
   itr: number = 1;
@@ -36,7 +44,7 @@ export class NewtonRaphsonComponent implements OnInit {
   UserEq(eq1: string) {
     this.user_equation = eq1;
     this.buatifulEq1 = this.buatifulEq(eq1);
-
+    console.log(this.buatifulEq1)
   }
   UserX0(eq2: string) {
     this.user_x0 = eq2;
@@ -85,7 +93,7 @@ export class NewtonRaphsonComponent implements OnInit {
   ans: any;
   displayedColumns: string[] = ['itr', 'xi', 'err'];
   dataSource = this.DATA;
-
+  ex0!:string;
   equation: string = '';
   buatifulEq1: string = '';
   x0_data: number[] = [];

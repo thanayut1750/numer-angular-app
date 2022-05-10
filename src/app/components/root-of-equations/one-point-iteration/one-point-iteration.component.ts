@@ -2,6 +2,7 @@ import { MatTable } from '@angular/material/table';
 import * as math from 'mathjs';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { OnePoint } from 'src/app/schema';
+import { NumerapiService } from 'src/app/service/numerapi.service';
 
 @Component({
   selector: 'app-one-point-iteration',
@@ -14,7 +15,15 @@ export class OnePointIterationComponent implements OnInit {
   graph() {
     this.displayGraph = !this.displayGraph;
   }
-  ngOnInit(): void {}
+  constructor(private _service: NumerapiService) {}
+  ngOnInit(): void {
+    this._service.onepointCall().subscribe((equations)=>{
+      console.log(equations);
+      this.eq1 = equations.Onepoint.eq1;
+      this.eq2 = equations.Onepoint.eq2;
+      this.root = equations.Onepoint.ans;
+    })
+  }
 
   @ViewChild(MatTable)
   table!: MatTable<any>;
@@ -42,7 +51,7 @@ export class OnePointIterationComponent implements OnInit {
   UserEq2(eq2:string){
     this.user_equation2 = eq2;
     this.buatifulEq2 = this.buatifulEq(eq2);
-    // console.log(this.buatifulEq2)
+    console.log(this.buatifulEq2)
     // console.log(this.user_equation2)
     this.Ans = this.onePoint(this.x0, this.error, this.max_itr)
   }
@@ -125,10 +134,9 @@ export class OnePointIterationComponent implements OnInit {
   equation2: string = 'g(x)=\\frac{6}{8(x + 1)}';
 
   //EXAMPLE EQUATION
-  equation: string = '';
-  eq1 = 0;
-  eq2 = 0;
-
+  eq1:string = '';
+  eq2:string = '';
+  root!: string;
   //USER INPUT
   user_equation1: string = '';
   user_equation2: string = '';

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import * as math from 'mathjs';
 import { Dataschema } from '../../../schema';
-
+import { NumerapiService } from '../../../service/numerapi.service'
 @Component({
   selector: 'app-false-position',
   templateUrl: './false-position.component.html',
@@ -14,7 +14,16 @@ export class FalsePositionComponent implements OnInit {
     this.displayGraph = !this.displayGraph;
   }
 
-  ngOnInit(): void {}
+  constructor(private _service: NumerapiService) {}
+  ngOnInit(): void {
+    this._service.falsepotionCall().subscribe((equations)=>{
+      console.log(equations);
+      this.equation = equations.Falsepotion.eq;
+      this.exl = equations.Falsepotion.xl;
+      this.exr = equations.Falsepotion.xr;
+      this.root = equations.Falsepotion.ans;
+    })
+  }
 
   @ViewChild(MatTable)
   table!: MatTable<any>;
@@ -34,9 +43,9 @@ export class FalsePositionComponent implements OnInit {
   //GET DATA FROM USER
   getUserEq(ueq: string) {
     this.user_equation = ueq;
-
     const node = math.parse(ueq);
     var t = node.toTex();
+    // console.log(t);
     this.buatifulEq = t;
   }
   getUserXl(ueq: number) {
@@ -116,6 +125,7 @@ export class FalsePositionComponent implements OnInit {
   equation: string = '';
   exl = 0;
   exr = 0;
+  root!: any;
 
   //Table Data source
   displayedColumns: string[] = ['itr', 'xl', 'xr', 'xm', 'fx', 'err'];
