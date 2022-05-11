@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JacobiComponent } from './jacobi-plot.component';
+import { JacobiPlotComponent } from './jacobi-plot.component';
 
-describe('JacobiComponent', () => {
-  let component: JacobiComponent;
-  let fixture: ComponentFixture<JacobiComponent>;
+describe('JacobiPlotComponent', () => {
+  let component: JacobiPlotComponent;
+  let fixture: ComponentFixture<JacobiPlotComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ JacobiComponent ]
+      declarations: [ JacobiPlotComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JacobiComponent);
+    fixture = TestBed.createComponent(JacobiPlotComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

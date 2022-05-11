@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BisecPlotComponent } from './graph-plot.component';
+import { GraphPlotComponent } from './graph-plot.component';
 
-describe('BisecPlotComponent', () => {
-  let component: BisecPlotComponent;
-  let fixture: ComponentFixture<BisecPlotComponent>;
+describe('GraphPlotComponent', () => {
+  let component: GraphPlotComponent;
+  let fixture: ComponentFixture<GraphPlotComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BisecPlotComponent ]
+      declarations: [ GraphPlotComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BisecPlotComponent);
+    fixture = TestBed.createComponent(GraphPlotComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
