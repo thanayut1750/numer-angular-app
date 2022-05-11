@@ -10,7 +10,7 @@ export class NumerapiService {
   constructor(private _http: HttpClient) { }
 
   token = 'akljnv13bvi2vfo0b0bw';
-  numerApiUrl = `http://localhost:8000/`
+  numerApiUrl = `http://localhost:8001/`
 
 
   bisectionCall():Observable<any> {
