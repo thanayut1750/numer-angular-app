@@ -15,7 +15,10 @@ export class BisectionComponent implements OnInit {
     this.displayGraph = !this.displayGraph;
   }
 
-  constructor(private _service: NumerapiService) {}
+  constructor(private _service: NumerapiService) {
+
+  }
+
   ngOnInit(): void {
     this._service.bisectionCall().subscribe((equations)=>{
       console.log(equations);
@@ -24,6 +27,7 @@ export class BisectionComponent implements OnInit {
       this.exr = equations.Bisection.xr;
       this.root = equations.Bisection.ans;
     })
+
   }
 
   @ViewChild(MatTable)

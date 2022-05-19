@@ -1,27 +1,17 @@
-# Stage 1: Compile and Build angular codebase
-
 # Use official node image as the base image
-FROM node:14-alpine AS build
+FROM node:latest AS FrontEndDevelopment
 
 # Set the working directory
-WORKDIR /app
-COPY / ./
+WORKDIR /numerapp/frontend/src/app
+
 COPY package*.json ./
 
 RUN npm install -g @angular/cli@10.0.4 && \
-    npm install && \
-    ng build
+    npm install
+
 COPY . .
 
+EXPOSE 4200 49153
 
-
-
-# Stage 2: Serve app with nginx server
-
-
-FROM nginx:latest
-
-COPY --from=build /app/dist/numer-project /usr/share/nginx/html
-
-EXPOSE 80
+CMD [ "npm", "start" ]
 

@@ -9,9 +9,12 @@ export class NumerapiService {
 
   constructor(private _http: HttpClient) { }
 
-  token = 'akljnv13bvi2vfo0b0bw';
+  token = 'akljnv13bvi52vfo0b0bw';
   numerApiUrl = `http://localhost:8001/`
 
+  getTest(): Observable<any> {
+    return this._http.get<any>('http://api:3000/app');
+  }
 
   bisectionCall():Observable<any> {
     const params = new HttpParams().append('token', this.token);
