@@ -79,7 +79,8 @@
               "browserTarget": "Numer-Project:build:production"
             },
             "development": {
-              "browserTarget": "Numer-Project:build:development"
+              "browserTarget": "Numer-Project:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

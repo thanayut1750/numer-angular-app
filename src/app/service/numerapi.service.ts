@@ -13,7 +13,7 @@ export class NumerapiService {
   numerApiUrl = `http://localhost:8001/`
 
   getTest(): Observable<any> {
-    return this._http.get<any>('http://api:3000/app');
+    return this._http.get<any>('api');
   }
 
   bisectionCall():Observable<any> {

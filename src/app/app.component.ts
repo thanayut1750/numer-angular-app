@@ -7,7 +7,7 @@ import { NumerapiService } from './service/numerapi.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'NumerProject';
+  title = 'NumerProjectt';
 
   constructor(private _service: NumerapiService) {
     this._service.getTest().subscribe(data => {console.log(data)})
