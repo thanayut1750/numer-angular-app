@@ -36,7 +36,9 @@ export class ConjugateGradientComponent implements OnInit {
       this.displayedColumns.push(String(i));
     }
   }
+
   xd: number[] = [];
+
   calculate() {
     let listUserInputA = [
       document.querySelectorAll<HTMLElement>('[id^="input"]'),
@@ -55,10 +57,9 @@ export class ConjugateGradientComponent implements OnInit {
         Number((document.getElementById(it.id) as HTMLInputElement).value)
       );
     });
-    // console.log(this.userValArr);
-    // console.log(this.userValB)
     this.arrToMat(this.userValArr);
-    // console.log(this.userValMat);
+    console.log(this.userValB);
+    console.log(this.userValMat);
     this.conjugateGradient(this.userValMat, this.userValB, this.guess);
 
     const __print = (x: any) => JSON.stringify(x);
@@ -67,12 +68,12 @@ export class ConjugateGradientComponent implements OnInit {
       this.xi_dataArr.push(x);
     };
 
-    this.xi_data.forEach((it: any) => {
-      __getdata(it[0]);
-    });
-    console.log(__print(this.xi_dataArr));
-    this.DATA = [Object.assign({}, this.xi_dataArr)];
-    console.log(this.DATA);
+    // this.xi_data.forEach((it: any) => {
+    //   __getdata(it[0]);
+    // });
+    // console.log(__print(this.xi_dataArr));
+    // this.DATA = [Object.assign({}, this.xi_dataArr)];
+    // console.log(this.DATA);
     this.dataSource = this.DATA;
     this.table.renderRows(); //reset table
   }
@@ -123,13 +124,56 @@ export class ConjugateGradientComponent implements OnInit {
   dataColIndex: number = 1;
   dataSource: any = [];
 
-
+  ak!: any;
+  xk_1!: any;
+  rk_1!: any;
+  Bk!: any;
+  Pk_1!: any;
+  itrtest: any[] = [];
   conjugateGradient(A: number[][], b: number[], x: math.MathType) {
+    //initial conditions
+    const __print = (x: any) => JSON.parse(x);
+    let xVector = __print(x);
 
+    let x0: number | any[] | math.Matrix | math.BigNumber | math.Fraction | math.Complex | math.Unit = [];
+    let r0: number | any[] | math.Matrix | math.BigNumber | math.Fraction | math.Complex | math.Unit = [];
+    let r0bar: number | any[] | math.Unit | math.BigNumber | math.Fraction | math.Complex | math.Matrix = [];
+    let P0: number | any[] | math.Matrix | math.BigNumber | math.Fraction | math.Complex | math.Unit = [];
+    let P0bar: number | any[] | math.Matrix | math.BigNumber | math.Fraction | math.Complex | math.Unit = [];
+    let alpha : number | any[] | math.Matrix | math.BigNumber | math.Fraction | math.Complex | math.Unit = [];
+
+    for (let k = 0; k < this.nRows; k++) {
+      x0[k] = xVector[k];
+      r0[k] = math.subtract(b, math.multiply(A, x0[k])) as math.MathArray;
+      r0bar[k] = r0[k];
+      P0[k] =  r0[k];
+      P0bar[k] = r0bar[k];
+      alpha[k] = math.divide(
+        math.multiply(math.transpose(r0[k]), r0bar[k]),
+        math.multiply(math.transpose(P0[k]), math.multiply(A, P0bar[k]))
+      );
+      x0[k+1] = math.add(x0[k], math.multiply(alpha[k],  P0[k])) as math.MathArray;
+
+      r0[k+1] = math.subtract(
+        r0[k],
+        math.multiply(alpha[k], math.multiply(A, P0[k]))
+      ) as unknown as math.MathArray;
+
+      r0bar = math.subtract(
+        r0bar[k],
+        math.multiply(alpha[k], math.multiply(math.transpose(A), P0bar[k]))
+      ) as unknown as math.MathArray;
+
+      let B = math.divide(
+        math.multiply(math.transpose(r0[k + 1]), r0bar[k + 1]),
+        math.multiply(math.transpose(r0[k]), r0bar[k])
+      ) as unknown as math.MathArray;
+
+      P0[k+1] = math.add(r0[k+1], math.multiply(B[k], P0[k])) as math.MathArray;
+      P0bar[k+1] = math.add(r0bar[k+1], math.multiply(B[k], P0bar[k])) as math.MathArray;
+    }
+    console.log(x0);
   }
-
-
-
 
   generateCell(): any {
     let cellTemplate = document.createElement('template');
